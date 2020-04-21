@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"github.com.artemkorsakov.combinatoric","l":"Coins"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.github.artemkorsakov.combinatoric","l":"Coins"},{"p":"com.github.artemkorsakov.primes","l":"PhiFunction"},{"p":"com.github.artemkorsakov.primes","l":"Primes"},{"p":"com.github.artemkorsakov.operations","l":"Squares"}]

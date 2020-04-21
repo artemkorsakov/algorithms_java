@@ -7,10 +7,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * The type Coins.
+ */
 public class Coins {
     /**
      * How many options to get a given result from given coins?
      *
+     * @param coins the coins
+     * @param total the total
+     * @return the count ways
      * @see <a href="https://projecteuler.net/overview=031">detailed description</a>
      */
     public static long getCountWays(List<Integer> coins, int total) {
@@ -19,6 +25,10 @@ public class Coins {
 
     /**
      * {@link Coins#getCountWays(List, int)}  getCountWays}
+     *
+     * @param coins the coins
+     * @param total the total
+     * @return the count ways
      */
     public static long getCountWays(int[] coins, int total) {
         int[] ways = new int[total + 1];
@@ -36,6 +46,8 @@ public class Coins {
     /**
      * A way of writing n as a sum of positive integers.
      *
+     * @param limit the limit
+     * @return the partitions count
      * @see <a href="https://en.wikipedia.org/wiki/Partition_(number_theory)">detailed description</a>
      */
     public static BigInteger getPartitionsCount(int limit) {
@@ -67,6 +79,9 @@ public class Coins {
 
     /**
      * How many options to get sum as a sum of at least two positive numbers?
+     *
+     * @param sum the sum
+     * @return the count
      */
     public static long getCount(int sum) {
         return getPartitionsCount(sum).subtract(BigInteger.ONE).longValueExact();
@@ -74,6 +89,10 @@ public class Coins {
 
     /**
      * Returns all options to get the sum sum with a given count of numbers.
+     *
+     * @param sum   the sum
+     * @param count the count
+     * @return the candidates powers
      */
     public static List<List<Integer>> getCandidatesPowers(int sum, int count) {
         return getCandidatesPowers(sum, count, sum);

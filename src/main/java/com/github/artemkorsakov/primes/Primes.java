@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+/**
+ * The type Primes.
+ */
 public class Primes {
     /**
      * Is number a prime number?
@@ -15,6 +18,9 @@ public class Primes {
      * All primes greater than 3 can be written in the form 6k+/-1.
      * The consequence for primality testing of a number n is: if we cannot find a number f less than
      * or equal n that divides n then n is prime: the only primefactor of n is n itself
+     *
+     * @param n the n
+     * @return the boolean
      */
     public static boolean isPrime(long n) {
         if (n < 2) {
@@ -48,6 +54,9 @@ public class Primes {
 
     /**
      * Get next prime number for the given prime number
+     *
+     * @param prime the prime
+     * @return the next prime
      */
     public static long getNextPrime(long prime) {
         if (prime == 2) {
@@ -67,6 +76,9 @@ public class Primes {
 
     /**
      * {@link Primes#getNextPrime(long)}  getNextPrime(long)}
+     *
+     * @param prime the prime
+     * @return the next prime
      */
     public static int getNextPrime(int prime) {
         return (int) getNextPrime((long) prime);
@@ -74,6 +86,9 @@ public class Primes {
 
     /**
      * Get all primes not more than limit (inclusive).
+     *
+     * @param limit the limit
+     * @return the int [ ]
      */
     public static int[] getAllPrimesNotMoreThanLimit(int limit) {
         boolean[] isPrime = getAllPrimesNotMoreThanLimitInBooleanArray(limit);
@@ -81,7 +96,10 @@ public class Primes {
     }
 
     /**
-     * Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 <= i <= n.
+     * Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 {@literal <}= i {@literal <}= n.
+     *
+     * @param limit the limit
+     * @return the boolean [ ]
      */
     public static boolean[] getAllPrimesNotMoreThanLimitInBooleanArray(int limit) {
         if (limit < 0) {
@@ -125,27 +143,45 @@ public class Primes {
     }
 
     /**
-     * Возвращает заданное количество простых чисел.
+     * Get the given number of primes.
      *
      * @param count the count
      * @return the the given number of primes
      */
     public static List<Long> getTheGivenNumberOfPrimes(int count) {
+        if (count <= 0) {
+            return new ArrayList<>();
+        }
         List<Long> primes = new ArrayList<>();
         primes.add(2L);
-        for (long i = 3; i < Long.MAX_VALUE && primes.size() < count; i = i + 2) {
-            if (isPrime(i)) {
-                primes.add(i);
-            }
+        if (count == 1) {
+            return primes;
         }
+        primes.add(3L);
+        if (count == 2) {
+            return primes;
+        }
+
+        long candidate = 5;
+        while (primes.size() < count) {
+            if (isPrime(candidate)) {
+                primes.add(candidate);
+            }
+            candidate += 2;
+            if (primes.size() < count && isPrime(candidate)) {
+                primes.add(candidate);
+            }
+            candidate += 4;
+        }
+
         return primes;
     }
 
     /**
-     * Возвращает наибольший простой делитель числа.
+     * Get the largest prime factor.
      *
      * @param number the number
-     * @return the the largest prime factor
+     * @return the largest prime factor
      */
     public static long getTheLargestPrimeFactor(long number) {
         long max = 1;
@@ -164,7 +200,7 @@ public class Primes {
     }
 
     /**
-     * Returns an array spf where spf[k] is the smallest prime factor of k, valid for 2 <= k <= n.
+     * Returns an array spf where spf[k] is the smallest prime factor of k, valid for 2 {@literal <}= k {@literal <}= n.
      * For example: listSmallestPrimeFactors(10) = {0, 0, 2, 3, 2, 5, 2, 7, 2, 3, 2}.
      *
      * @param n the n
@@ -177,7 +213,6 @@ public class Primes {
             if (result[i] == 0) {
                 result[i] = i;
                 if (i <= limit) {
-                    // Note: i * i does not overflow
                     for (int j = i * i; j <= n; j += i) {
                         if (result[j] == 0) {
                             result[j] = i;
@@ -189,9 +224,8 @@ public class Primes {
         return result;
     }
 
-
     /**
-     * Возвращает наименьший простой делитель числа.
+     * Get the smallest prime factor.
      *
      * @param number the number
      * @return the the smallest prime factor
@@ -205,21 +239,11 @@ public class Primes {
             i++;
         }
 
-        return 1;
+        return number;
     }
 
     /**
-     * Возвращает количество простых делителей числа
-     *
-     * @param number the number
-     * @return the count of prime factors
-     */
-    public static int getCountOfPrimeFactors(int number) {
-        return getAllPrimeFactorsWithPow(number).size();
-    }
-
-    /**
-     * Возвращает все простые делители числа вместе со своими степенями
+     * Get all prime divisors of a number along with its powers.
      *
      * @param number the number
      * @return the all prime factors with pow
