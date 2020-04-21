@@ -3,15 +3,9 @@ package com.github.artemkorsakov.operations;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Squares.
- */
 public class Squares {
     /**
      * Is number a square?
-     *
-     * @param n the n
-     * @return the boolean
      */
     public static boolean isSquare(long n) {
         long s = (long) Math.sqrt(n);
@@ -20,9 +14,6 @@ public class Squares {
 
     /**
      * Gets all square numbers the number of digits in which is equal to the given.
-     *
-     * @param countOfDigits the count of digits
-     * @return the all squares
      */
     public static List<Integer> getAllSquares(int countOfDigits) {
         int start = (int) Math.pow(10, countOfDigits - 1);
@@ -31,11 +22,7 @@ public class Squares {
     }
 
     /**
-     * Gets all square numbers from start to finish inclusive.
-     *
-     * @param start  the start
-     * @param finish the finish
-     * @return the all squares
+     * Gets all square numbers from start (inclusive) to finish (inclusive).
      */
     public static List<Integer> getAllSquares(int start, int finish) {
         List<Integer> result = new ArrayList<>();

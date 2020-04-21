@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-/**
- * The type Primes.
- */
 public class Primes {
     /**
      * Is number a prime number?
@@ -18,9 +15,6 @@ public class Primes {
      * All primes greater than 3 can be written in the form 6k+/-1.
      * The consequence for primality testing of a number n is: if we cannot find a number f less than
      * or equal n that divides n then n is prime: the only primefactor of n is n itself
-     *
-     * @param n the n
-     * @return the boolean
      */
     public static boolean isPrime(long n) {
         if (n < 2) {
@@ -53,10 +47,7 @@ public class Primes {
     }
 
     /**
-     * Get next prime number for the given prime number
-     *
-     * @param prime the prime
-     * @return the next prime
+     * Get next prime number for the given prime number.
      */
     public static long getNextPrime(long prime) {
         if (prime == 2) {
@@ -76,9 +67,6 @@ public class Primes {
 
     /**
      * {@link Primes#getNextPrime(long)}  getNextPrime(long)}
-     *
-     * @param prime the prime
-     * @return the next prime
      */
     public static int getNextPrime(int prime) {
         return (int) getNextPrime((long) prime);
@@ -86,9 +74,6 @@ public class Primes {
 
     /**
      * Get all primes not more than limit (inclusive).
-     *
-     * @param limit the limit
-     * @return the int [ ]
      */
     public static int[] getAllPrimesNotMoreThanLimit(int limit) {
         boolean[] isPrime = getAllPrimesNotMoreThanLimitInBooleanArray(limit);
@@ -97,9 +82,6 @@ public class Primes {
 
     /**
      * Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 {@literal <}= i {@literal <}= n.
-     *
-     * @param limit the limit
-     * @return the boolean [ ]
      */
     public static boolean[] getAllPrimesNotMoreThanLimitInBooleanArray(int limit) {
         if (limit < 0) {
@@ -144,9 +126,6 @@ public class Primes {
 
     /**
      * Get the given number of primes.
-     *
-     * @param count the count
-     * @return the the given number of primes
      */
     public static List<Long> getTheGivenNumberOfPrimes(int count) {
         if (count <= 0) {
@@ -179,9 +158,6 @@ public class Primes {
 
     /**
      * Get the largest prime factor.
-     *
-     * @param number the number
-     * @return the largest prime factor
      */
     public static long getTheLargestPrimeFactor(long number) {
         long max = 1;
@@ -202,9 +178,6 @@ public class Primes {
     /**
      * Returns an array spf where spf[k] is the smallest prime factor of k, valid for 2 {@literal <}= k {@literal <}= n.
      * For example: listSmallestPrimeFactors(10) = {0, 0, 2, 3, 2, 5, 2, 7, 2, 3, 2}.
-     *
-     * @param n the n
-     * @return the int [ ]
      */
     public static int[] getListSmallestPrimeFactors(int n) {
         int[] result = new int[n + 1];
@@ -226,9 +199,6 @@ public class Primes {
 
     /**
      * Get the smallest prime factor.
-     *
-     * @param number the number
-     * @return the the smallest prime factor
      */
     public static long getTheSmallestPrimeFactor(long number) {
         long i = 2;
@@ -244,9 +214,6 @@ public class Primes {
 
     /**
      * Get all prime divisors of a number along with its powers.
-     *
-     * @param number the number
-     * @return the all prime factors with pow
      */
     public static Map<Integer, Integer> getAllPrimeFactorsWithPow(long number) {
         Map<Integer, Integer> result = new HashMap<>();
