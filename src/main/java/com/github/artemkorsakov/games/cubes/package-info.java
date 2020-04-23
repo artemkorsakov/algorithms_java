@@ -1,0 +1,1 @@
+package com.github.artemkorsakov.games.cubes;
