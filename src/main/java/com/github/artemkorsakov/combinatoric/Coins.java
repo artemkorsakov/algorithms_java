@@ -18,7 +18,7 @@ public class Coins {
     }
 
     /**
-     * {@link Coins#getCountWays(List, int)}  getCountWays}
+     * {@link Coins#getCountWays(List, int)}  getCountWays
      */
     public static long getCountWays(int[] coins, int total) {
         int[] ways = new int[total + 1];
