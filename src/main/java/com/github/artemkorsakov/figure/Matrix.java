@@ -327,33 +327,114 @@ public class Matrix {
      * <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">multiplication</a>
      */
     public static long[][] mult(long[][] a, long[][] b) {
-        return null;
+        if (a.length == 0 || b.length == 0 || Arrays.stream(a).anyMatch(i -> i.length != a[0].length)
+                || Arrays.stream(b).anyMatch(i -> i.length != b[0].length) || a[0].length != b.length) {
+            throw new IllegalArgumentException();
+        }
+
+        long[][] c = new long[a.length][b[0].length];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) {
+                long[] x = a[i];
+                int finalJ = j;
+                long[] y = Arrays.stream(b).mapToLong(col -> col[finalJ]).toArray();
+                c[i][j] = dot(x, y);
+            }
+        }
+
+        return c;
     }
 
     /**
      * {@link Matrix#mult(long[][], long[])} multiplication
      */
     public static double[][] mult(double[][] a, double[][] b) {
-        return null;
+        if (a.length == 0 || b.length == 0 || Arrays.stream(a).anyMatch(i -> i.length != a[0].length)
+                || Arrays.stream(b).anyMatch(i -> i.length != b[0].length) || a[0].length != b.length) {
+            throw new IllegalArgumentException();
+        }
+
+        double[][] c = new double[a.length][b[0].length];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) {
+                double[] x = a[i];
+                int finalJ = j;
+                double[] y = Arrays.stream(b).mapToDouble(col -> col[finalJ]).toArray();
+                c[i][j] = dot(x, y);
+            }
+        }
+
+        return c;
     }
 
     /**
      * {@link Matrix#mult(long[][], long[])} multiplication
      */
     public static BigInteger[][] mult(BigInteger[][] a, BigInteger[][] b) {
-        return null;
+        if (a.length == 0 || b.length == 0 || Arrays.stream(a).anyMatch(i -> i.length != a[0].length)
+                || Arrays.stream(b).anyMatch(i -> i.length != b[0].length) || a[0].length != b.length) {
+            throw new IllegalArgumentException();
+        }
+
+        BigInteger[][] c = new BigInteger[a.length][b[0].length];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) {
+                BigInteger[] x = a[i];
+                int finalJ = j;
+                BigInteger[] y = Arrays.stream(b).map(col -> col[finalJ]).toArray(BigInteger[]::new);
+                c[i][j] = dot(x, y);
+            }
+        }
+
+        return c;
     }
 
     public static long[][] power(long[][] a, long b) {
-        return null;
+        if (b < 1) {
+            throw new IllegalArgumentException();
+        }
+        if (b == 1) {
+            return a;
+        }
+
+        long[][] c = mult(a, a);
+        for (long i = 3; i <= b; i++) {
+            c = mult(c, a);
+        }
+
+        return c;
     }
 
     public static double[][] power(double[][] a, long b) {
-        return null;
+        if (b < 1) {
+            throw new IllegalArgumentException();
+        }
+        if (b == 1) {
+            return a;
+        }
+
+        double[][] c = mult(a, a);
+        for (long i = 3; i <= b; i++) {
+            c = mult(c, a);
+        }
+
+        return c;
     }
 
-    public static BigInteger[][] power(BigInteger[][] a, BigInteger b) {
-        return null;
+    public static BigInteger[][] power(BigInteger[][] a, long b) {
+        if (b < 1) {
+            throw new IllegalArgumentException();
+        }
+        if (b == 1) {
+            return a;
+        }
+
+        BigInteger[][] c = mult(a, a);
+        for (long i = 3; i <= b; i++) {
+            c = mult(c, a);
+        }
+
+        return c;
     }
 
 }

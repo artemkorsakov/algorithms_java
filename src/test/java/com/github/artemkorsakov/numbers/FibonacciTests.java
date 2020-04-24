@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class FibonacciTests {
     @Test
@@ -28,7 +29,19 @@ public class FibonacciTests {
         Assert.assertEquals(Fibonacci.getFibonacciNumber(18).longValueExact(), 2584);
         Assert.assertEquals(Fibonacci.getFibonacciNumber(19).longValueExact(), 4181);
         Assert.assertEquals(Fibonacci.getFibonacciNumber(20).longValueExact(), 6765);
+        Assert.assertEquals(Fibonacci.getFibonacciNumber(21).longValueExact(), 10946);
 
         Assert.assertEquals(Fibonacci.getFibonacciNumber(100), new BigInteger("354224848179265190133"));
+    }
+
+    @Test
+    public void testGetFibonacciMatrix() {
+        long[][] matrix = Fibonacci.getFibonacciMatrix(20);
+        System.out.println(Arrays.deepToString(matrix));
+
+        Assert.assertEquals(matrix[0][0], Fibonacci.getFibonacciNumber(21).longValueExact());
+        Assert.assertEquals(matrix[0][1], Fibonacci.getFibonacciNumber(20).longValueExact());
+        Assert.assertEquals(matrix[1][0], Fibonacci.getFibonacciNumber(20).longValueExact());
+        Assert.assertEquals(matrix[1][1], Fibonacci.getFibonacciNumber(19).longValueExact());
     }
 }

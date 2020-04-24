@@ -137,13 +137,21 @@ public class MatrixTests {
 
     @Test
     public void testMul() {
-
+        long[][] matrixA = new long[][]{new long[]{3, 4, 2, 5}, new long[]{0, -1, 3, 2}, new long[]{1, 2, 3, 0}};
+        long[][] matrixB = new long[][]{new long[]{1, 2, 3}, new long[]{-3, 5, 4}, new long[]{6, 2, 1}, new long[]{1, -1, 0}};
+        long[][] matrixC = new long[][]{new long[]{8, 25, 27}, new long[]{23, -1, -1}, new long[]{13, 18, 14}};
+        Assert.assertEquals(Matrix.mult(matrixA, matrixB), matrixC);
     }
-
 
     @Test
     public void testPower() {
+        long[][] matrixA = new long[][]{new long[]{2, 0}, new long[]{-1, 3}};
+        long[][] matrixB = new long[][]{new long[]{4, 0}, new long[]{-5, 9}};
+        Assert.assertEquals(Matrix.power(matrixA, 2), matrixB);
 
+        long[][] fibonacciMatrix = new long[][]{new long[]{1, 1}, new long[]{1, 0}};
+        long[][] matrix = Matrix.power(fibonacciMatrix, 20);
+        Assert.assertEquals(matrix, new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}});
     }
 
     private double[][] toDouble(long[][] matrix) {
