@@ -397,9 +397,19 @@ public class Matrix {
             return a;
         }
 
-        long[][] c = mult(a, a);
-        for (long i = 3; i <= b; i++) {
-            c = mult(c, a);
+        String powers = Long.toBinaryString(b);
+        long[][][] powersC = new long[powers.length()][][];
+        powersC[0] = a;
+        for (int i = 1; i < powersC.length; i++) {
+            powersC[i] = mult(powersC[i - 1], powersC[i - 1]);
+        }
+
+        long[][] c = powersC[powersC.length - 1];
+
+        for (int i = 1; i < powers.length(); i++) {
+            if (powers.charAt(i) == '1') {
+                c = mult(c, powersC[powersC.length - 1 - i]);
+            }
         }
 
         return c;
@@ -413,9 +423,19 @@ public class Matrix {
             return a;
         }
 
-        double[][] c = mult(a, a);
-        for (long i = 3; i <= b; i++) {
-            c = mult(c, a);
+        String powers = Long.toBinaryString(b);
+        double[][][] powersC = new double[powers.length()][][];
+        powersC[0] = a;
+        for (int i = 1; i < powersC.length; i++) {
+            powersC[i] = mult(powersC[i - 1], powersC[i - 1]);
+        }
+
+        double[][] c = powersC[powersC.length - 1];
+
+        for (int i = 1; i < powers.length(); i++) {
+            if (powers.charAt(i) == '1') {
+                c = mult(c, powersC[powersC.length - 1 - i]);
+            }
         }
 
         return c;
@@ -429,9 +449,19 @@ public class Matrix {
             return a;
         }
 
-        BigInteger[][] c = mult(a, a);
-        for (long i = 3; i <= b; i++) {
-            c = mult(c, a);
+        String powers = Long.toBinaryString(b);
+        BigInteger[][][] powersC = new BigInteger[powers.length()][][];
+        powersC[0] = a;
+        for (int i = 1; i < powersC.length; i++) {
+            powersC[i] = mult(powersC[i - 1], powersC[i - 1]);
+        }
+
+        BigInteger[][] c = powersC[powersC.length - 1];
+
+        for (int i = 1; i < powers.length(); i++) {
+            if (powers.charAt(i) == '1') {
+                c = mult(c, powersC[powersC.length - 1 - i]);
+            }
         }
 
         return c;

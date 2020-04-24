@@ -152,6 +152,8 @@ public class MatrixTests {
         long[][] fibonacciMatrix = new long[][]{new long[]{1, 1}, new long[]{1, 0}};
         long[][] matrix = Matrix.power(fibonacciMatrix, 20);
         Assert.assertEquals(matrix, new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}});
+        Assert.assertEquals(toDouble(matrix), toDouble(new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}}));
+        Assert.assertEquals(toBigInteger(matrix), toBigInteger(new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}}));
     }
 
     private double[][] toDouble(long[][] matrix) {
