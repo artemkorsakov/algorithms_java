@@ -323,16 +323,36 @@ public class Matrix {
         return mult(new BigInteger[][]{a}, b)[0];
     }
 
-    // static double[][] mult(double[][] a, double[][] b) Произведение двух матриц
+    /**
+     * <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">multiplication</a>
+     */
     public static long[][] mult(long[][] a, long[][] b) {
         return null;
     }
 
+    /**
+     * {@link Matrix#mult(long[][], long[])} multiplication
+     */
     public static double[][] mult(double[][] a, double[][] b) {
         return null;
     }
 
+    /**
+     * {@link Matrix#mult(long[][], long[])} multiplication
+     */
     public static BigInteger[][] mult(BigInteger[][] a, BigInteger[][] b) {
+        return null;
+    }
+
+    public static long[][] power(long[][] a, long b) {
+        return null;
+    }
+
+    public static double[][] power(double[][] a, long b) {
+        return null;
+    }
+
+    public static BigInteger[][] power(BigInteger[][] a, BigInteger b) {
         return null;
     }
 

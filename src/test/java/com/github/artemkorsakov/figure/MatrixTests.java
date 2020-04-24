@@ -136,12 +136,13 @@ public class MatrixTests {
     }
 
     @Test
-    public void test2() {
+    public void testMul() {
 
     }
 
+
     @Test
-    public void testMul() {
+    public void testPower() {
 
     }
 
