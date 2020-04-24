@@ -10,7 +10,9 @@ com.github.artemkorsakov.games.nim
 com.github.artemkorsakov.games.poker
 com.github.artemkorsakov.games.sudoku
 com.github.artemkorsakov.numbers
+com.github.artemkorsakov.numbers.cyclical
 com.github.artemkorsakov.numerals
 com.github.artemkorsakov.operations
+com.github.artemkorsakov.powers
 com.github.artemkorsakov.primes
 com.github.artemkorsakov.str
