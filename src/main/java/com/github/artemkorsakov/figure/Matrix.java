@@ -14,22 +14,39 @@ public class Matrix {
         if (x.length != y.length) {
             throw new IllegalArgumentException("Vector lengths should be equal");
         }
-        return IntStream.range(0, x.length).parallel().mapToLong(i -> x[i] * y[i]).sum();
+        return IntStream.range(0, x.length).parallel()
+                .filter(i -> x[i] != 0 && y[i] != 0)
+                .mapToLong(i -> x[i] * y[i])
+                .sum();
     }
 
     public static double dot(double[] x, double[] y) {
         if (x.length != y.length) {
             throw new IllegalArgumentException("Vector lengths should be equal");
         }
-        return IntStream.range(0, x.length).parallel().mapToDouble(i -> x[i] * y[i]).sum();
+        return IntStream.range(0, x.length).parallel()
+                .filter(i -> x[i] != 0 && y[i] != 0)
+                .mapToDouble(i -> x[i] * y[i]).sum();
     }
 
     public static BigInteger dot(BigInteger[] x, BigInteger[] y) {
         if (x.length != y.length) {
             throw new IllegalArgumentException("Vector lengths should be equal");
         }
-        return IntStream.range(0, x.length).parallel().mapToObj(i -> x[i].multiply(y[i]))
+        return IntStream.range(0, x.length).parallel()
+                .filter(i -> !x[i].equals(BigInteger.ZERO) && !y[i].equals(BigInteger.ZERO))
+                .mapToObj(i -> x[i].multiply(y[i]))
                 .reduce(BigInteger::add).orElse(BigInteger.ZERO);
+    }
+
+    public static long dotMod(long[] x, long[] y, long module) {
+        if (x.length != y.length) {
+            throw new IllegalArgumentException("Vector lengths should be equal");
+        }
+        return IntStream.range(0, x.length).parallel()
+                .filter(i -> x[i] != 0 && y[i] != 0)
+                .mapToLong(i -> (x[i] * y[i]) % module)
+                .sum() % module;
     }
 
     /**
@@ -299,6 +316,18 @@ public class Matrix {
         return c;
     }
 
+    public static long[][] multMod(long[][] a, long b, long module) {
+        long[][] c = new long[a.length][];
+        for (int i = 0; i < c.length; i++) {
+            c[i] = new long[a[0].length];
+            for (int j = 0; j < c[i].length; j++) {
+                c[i][j] = b * a[i][j] % module;
+            }
+        }
+
+        return c;
+    }
+
     public static long[] mult(long[][] a, long[] b) {
         return Arrays.stream(mult(a, new long[][]{b})).mapToLong(r -> r[0]).toArray();
     }
@@ -311,6 +340,10 @@ public class Matrix {
         return Arrays.stream(mult(a, new BigInteger[][]{b})).map(r -> r[0]).toArray(BigInteger[]::new);
     }
 
+    public static long[] multMod(long[][] a, long[] b, long module) {
+        return Arrays.stream(multMod(a, new long[][]{b}, module)).mapToLong(r -> r[0]).toArray();
+    }
+
     public static long[] mult(long[] a, long[][] b) {
         return mult(new long[][]{a}, b)[0];
     }
@@ -321,6 +354,10 @@ public class Matrix {
 
     public static BigInteger[] mult(BigInteger[] a, BigInteger[][] b) {
         return mult(new BigInteger[][]{a}, b)[0];
+    }
+
+    public static long[] multMod(long[] a, long[][] b, long module) {
+        return multMod(new long[][]{a}, b, module)[0];
     }
 
     /**
@@ -383,6 +420,28 @@ public class Matrix {
                 int finalJ = j;
                 BigInteger[] y = Arrays.stream(b).map(col -> col[finalJ]).toArray(BigInteger[]::new);
                 c[i][j] = dot(x, y);
+            }
+        }
+
+        return c;
+    }
+
+    /**
+     * {@link Matrix#mult(long[][], long[])} multiplication
+     */
+    public static long[][] multMod(long[][] a, long[][] b, long module) {
+        if (a.length == 0 || b.length == 0 || Arrays.stream(a).anyMatch(i -> i.length != a[0].length)
+                || Arrays.stream(b).anyMatch(i -> i.length != b[0].length) || a[0].length != b.length) {
+            throw new IllegalArgumentException();
+        }
+
+        long[][] c = new long[a.length][b[0].length];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length; j++) {
+                long[] x = a[i];
+                int finalJ = j;
+                long[] y = Arrays.stream(b).parallel().mapToLong(col -> col[finalJ]).toArray();
+                c[i][j] = dotMod(x, y, module);
             }
         }
 
@@ -461,6 +520,32 @@ public class Matrix {
         for (int i = 1; i < powers.length(); i++) {
             if (powers.charAt(i) == '1') {
                 c = mult(c, powersC[powersC.length - 1 - i]);
+            }
+        }
+
+        return c;
+    }
+
+    public static long[][] powerMod(long[][] a, long b, long module) {
+        if (b < 1) {
+            throw new IllegalArgumentException();
+        }
+        if (b == 1) {
+            return a;
+        }
+
+        String powers = Long.toBinaryString(b);
+        long[][][] powersC = new long[powers.length()][][];
+        powersC[0] = a;
+        for (int i = 1; i < powersC.length; i++) {
+            powersC[i] = multMod(powersC[i - 1], powersC[i - 1], module);
+        }
+
+        long[][] c = powersC[powersC.length - 1];
+
+        for (int i = 1; i < powers.length(); i++) {
+            if (powers.charAt(i) == '1') {
+                c = multMod(c, powersC[powersC.length - 1 - i], module);
             }
         }
 

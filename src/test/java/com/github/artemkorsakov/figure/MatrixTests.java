@@ -23,6 +23,13 @@ public class MatrixTests {
     }
 
     @Test
+    public void testDotMod() {
+        long[] x = new long[]{1007, 2456, -3466};
+        long[] y = new long[]{-3347, 4343, 6445};
+        Assert.assertEquals(Matrix.dotMod(x, y, 1000), -391);
+    }
+
+    @Test
     public void testTransposeLong() {
         long[][] matrix1 = new long[][]{new long[]{1, 2}};
         long[][] matrix2 = new long[][]{new long[]{1}, new long[]{2}};
@@ -154,6 +161,17 @@ public class MatrixTests {
         Assert.assertEquals(matrix, new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}});
         Assert.assertEquals(toDouble(matrix), toDouble(new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}}));
         Assert.assertEquals(toBigInteger(matrix), toBigInteger(new long[][]{new long[]{10946, 6765}, new long[]{6765, 4181}}));
+
+        long[][] matrixC = new long[][]{new long[]{1, 2, 1, 0}, new long[]{1, 1, 0, -1}, new long[]{-2, 0, 1, 2}, new long[]{0, 2, 1, 1}};
+        long[][] matrixD = new long[][]{new long[]{1, 200, 100, 0}, new long[]{100, 1, 0, -100}, new long[]{-200, 0, 1, 200}, new long[]{0, 200, 100, 1}};
+        Assert.assertEquals(Matrix.power(matrixC, 100), matrixD);
+    }
+
+    @Test
+    public void testPowerMod() {
+        long[][] fibonacciMatrix = new long[][]{new long[]{1, 1}, new long[]{1, 0}};
+        long[][] matrix = Matrix.powerMod(fibonacciMatrix, 50, 1_000_000);
+        Assert.assertEquals(matrix, new long[][]{new long[]{11074, 269025}, new long[]{269025, 742049}});
     }
 
     private double[][] toDouble(long[][] matrix) {
@@ -163,4 +181,71 @@ public class MatrixTests {
     private BigInteger[][] toBigInteger(long[][] matrix) {
         return Arrays.stream(matrix).map(m -> Arrays.stream(m).mapToObj(BigInteger::valueOf).toArray(BigInteger[]::new)).toArray(BigInteger[][]::new);
     }
+
+    @Test
+    public void testTemp() {
+        long[][] matrix = getMatrix();
+        long[][] matrixK = Matrix.powerMod(matrix, 2, 20092010);
+        System.out.println(Arrays.toString(matrixK[0]));
+        System.out.println(Arrays.toString(matrixK[1]));
+        System.out.println(Arrays.toString(matrixK[2]));
+        System.out.println(Arrays.toString(matrixK[3]));
+        System.out.println(Arrays.toString(matrixK[4]));
+        System.out.println("*************************");
+        System.out.println(Arrays.toString(matrixK[1995]));
+        System.out.println(Arrays.toString(matrixK[1996]));
+        System.out.println(Arrays.toString(matrixK[1997]));
+        System.out.println(Arrays.toString(matrixK[1998]));
+        System.out.println(Arrays.toString(matrixK[1999]));
+
+        Assert.assertEquals(matrixK[0], new long[]{});
+        Assert.assertEquals(matrixK[1], new long[]{});
+        Assert.assertEquals(matrixK[2], new long[]{});
+        Assert.assertEquals(matrixK[3], new long[]{});
+        Assert.assertEquals(matrixK[4], new long[]{});
+        Assert.assertEquals(matrixK[1995], new long[]{});
+        Assert.assertEquals(matrixK[1996], new long[]{});
+        Assert.assertEquals(matrixK[1997], new long[]{});
+        Assert.assertEquals(matrixK[1998], new long[]{});
+        Assert.assertEquals(matrixK[1999], new long[]{});
+
+        matrixK = Matrix.powerMod(matrix, 10, 20092010);
+        System.out.println(Arrays.toString(matrixK[0]));
+        System.out.println(Arrays.toString(matrixK[1]));
+        System.out.println(Arrays.toString(matrixK[2]));
+        System.out.println(Arrays.toString(matrixK[3]));
+        System.out.println(Arrays.toString(matrixK[4]));
+        System.out.println("*************************");
+        System.out.println(Arrays.toString(matrixK[1995]));
+        System.out.println(Arrays.toString(matrixK[1996]));
+        System.out.println(Arrays.toString(matrixK[1997]));
+        System.out.println(Arrays.toString(matrixK[1998]));
+        System.out.println(Arrays.toString(matrixK[1999]));
+
+        Assert.assertEquals(matrixK[0], new long[]{});
+        Assert.assertEquals(matrixK[1], new long[]{});
+        Assert.assertEquals(matrixK[2], new long[]{});
+        Assert.assertEquals(matrixK[3], new long[]{});
+        Assert.assertEquals(matrixK[4], new long[]{});
+        Assert.assertEquals(matrixK[1995], new long[]{});
+        Assert.assertEquals(matrixK[1996], new long[]{});
+        Assert.assertEquals(matrixK[1997], new long[]{});
+        Assert.assertEquals(matrixK[1998], new long[]{});
+        Assert.assertEquals(matrixK[1999], new long[]{});
+    }
+
+    private long[][] getMatrix() {
+        long[][] matrix = new long[2000][2000];
+        matrix[0] = new long[2000];
+        matrix[0][0] = 1;
+        matrix[0][1998] = 1;
+        matrix[0][1999] = 1;
+        for (int i = 1; i < 2000; i++) {
+            matrix[i] = new long[2000];
+            matrix[i][i - 1] = 1;
+            matrix[i][i] = 1;
+        }
+        return matrix;
+    }
+
 }
