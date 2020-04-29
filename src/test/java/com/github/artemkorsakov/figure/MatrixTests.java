@@ -182,6 +182,9 @@ public class MatrixTests {
         return Arrays.stream(matrix).map(m -> Arrays.stream(m).mapToObj(BigInteger::valueOf).toArray(BigInteger[]::new)).toArray(BigInteger[][]::new);
     }
 
+    /*
+    http://pmpu.ru/vf4/algebra2/funmatrix
+     */
     @Test
     public void testTemp() {
         long[][] matrix = getMatrix();

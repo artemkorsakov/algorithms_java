@@ -68,6 +68,8 @@ public class PrimesTests {
         Assert.assertEquals(29L, primeFactor);
         primeFactor = Primes.getTheLargestPrimeFactor(600851475143L);
         Assert.assertEquals(6857L, primeFactor);
+        primeFactor = Primes.getTheLargestPrimeFactor(5);
+        Assert.assertEquals(5, primeFactor);
     }
 
     @Test
