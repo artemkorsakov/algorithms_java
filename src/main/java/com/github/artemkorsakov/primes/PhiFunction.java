@@ -17,4 +17,29 @@ public class PhiFunction {
 
         return (long) result;
     }
+
+    /**
+     * phi(p*n) = p*phi(n), if n%p == 0; phi(p)*phi(n), if n%p != 0
+     */
+    public static int[] getPhiFunctionArray(int limit) {
+        int[] phiArray = new int[limit + 1];
+        phiArray[1] = 1;
+
+        int[] primes = Primes.getAllPrimesNotMoreThanLimit(limit);
+
+        for (int n = 1; n <= limit / 2; n++) {
+            for (int p : primes) {
+                if (n * p > limit) {
+                    break;
+                }
+                if (n % p == 0) {
+                    phiArray[n * p] = phiArray[n] * p;
+                } else {
+                    phiArray[n * p] = phiArray[n] * (p - 1);
+                }
+            }
+        }
+
+        return phiArray;
+    }
 }

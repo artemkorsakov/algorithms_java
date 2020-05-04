@@ -27,4 +27,13 @@ public class PhiFunctionTests {
         Assert.assertEquals(PhiFunction.getPhiFunction(9983167), 9973816);
     }
 
+    @Test
+    public void testGetPhiFunctionArray() {
+        int[] phiArray = PhiFunction.getPhiFunctionArray(10000);
+
+        for (int i = 1; i < phiArray.length; i++) {
+            Assert.assertEquals(phiArray[i], PhiFunction.getPhiFunction(i));
+        }
+    }
+
 }
