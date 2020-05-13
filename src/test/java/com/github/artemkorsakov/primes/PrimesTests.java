@@ -46,6 +46,14 @@ public class PrimesTests {
         Assert.assertFalse(primes[1001000]);
         Assert.assertTrue(primes[1000999]);
         Assert.assertFalse(primes[1000998]);
+
+        primes = Primes.getAllPrimesNotMoreThanLimitInBooleanArray(2_000_000_000);
+        Assert.assertTrue(primes[1001003]);
+        Assert.assertFalse(primes[1001002]);
+        Assert.assertFalse(primes[1001001]);
+        Assert.assertFalse(primes[1001000]);
+        Assert.assertTrue(primes[1000999]);
+        Assert.assertFalse(primes[1000998]);
     }
 
     @Test

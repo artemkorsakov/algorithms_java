@@ -1,5 +1,6 @@
 package com.github.artemkorsakov.numbers;
 
+import com.github.artemkorsakov.divisors.Divisors;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class PythagoreanTripletHelper {
                 }
                 int k = m % 2 == 1 ? m + 2 : m + 1;
                 while (k < 2 * m && k <= sm) {
-                    if (sm % k == 0 && com.github.artemkorsakov.divisors.Divisors.gcd(k, m) == 1) {
+                    if (sm % k == 0 && Divisors.gcd(k, m) == 1) {
                         int d = s2 / (k * m);
                         int n = k - m;
                         int a = d * (m * m - n * n);

@@ -89,4 +89,10 @@ public class CoinsTests {
         powersList = Coins.getCandidatesPowers(10, 10);
         Assert.assertEquals(powersList, Collections.singletonList(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1)));
     }
+
+    @Test
+    public void testGetBlockWays() {
+        Assert.assertEquals(Coins.getBlockWays(4, 1, 1), 4);
+        Assert.assertEquals(Coins.getBlockWays(3, 2, 2), 6);
+    }
 }

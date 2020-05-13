@@ -38,4 +38,10 @@ public class ChineseRemainderTheoremTests {
         n = ChineseRemainderTheorem.getSolution(new BigInteger[]{A, MOD}, new BigInteger[]{BigInteger.ZERO, BigInteger.valueOf(14578937)}).divide(A).longValueExact();
         Assert.assertEquals(n, 893779696);
     }
+
+    @Test
+    public void testGetSolution2() {
+        long n = ChineseRemainderTheorem.getSolution(new long[]{2, 3}, new long[]{1, 2});
+        Assert.assertEquals(n, 5);
+    }
 }

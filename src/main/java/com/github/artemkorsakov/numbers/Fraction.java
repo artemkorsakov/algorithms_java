@@ -1,5 +1,6 @@
 package com.github.artemkorsakov.numbers;
 
+import com.github.artemkorsakov.divisors.Divisors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,18 @@ public class Fraction implements Comparable<Fraction> {
     }
 
     public Fraction(BigInteger numerator, BigInteger denominator) {
-        BigInteger gcd = com.github.artemkorsakov.divisors.Divisors.gcd(numerator, denominator);
-        this.numerator = numerator.divide(gcd);
-        this.denominator = denominator.divide(gcd);
+        if (denominator.equals(BigInteger.ZERO)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (numerator.equals(BigInteger.ZERO)) {
+            this.numerator = BigInteger.ZERO;
+            this.denominator = BigInteger.ONE;
+        } else {
+            BigInteger gcd = Divisors.gcd(numerator, denominator);
+            this.numerator = numerator.divide(gcd);
+            this.denominator = denominator.divide(gcd);
+        }
     }
 
     public Fraction(Fraction fraction) {

@@ -43,7 +43,7 @@ public class Polynomial {
                 long t = coeff[i] * p.coeff[j];
                 if ((i + j) < n) {
                     ret[i + j] += t;
-                } else { //This method needs to be generalised later;
+                } else {
                     ret[(i + j) % n + 1] += t;
                     ret[(i + j) % n] += t;
                 }

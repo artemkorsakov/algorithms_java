@@ -79,6 +79,24 @@ public class Coins {
         return getCandidatesPowers(sum, count, sum);
     }
 
+    /**
+     * У нас есть k блоков по n элементов. Сколько различных вариантов вытащить m элементов,
+     * так что имеет значение только блок, из которого он вытаскивается?
+     */
+    public static long getBlockWays(long k, long n, long m) {
+        if (k < 0 || n < 0 || m < 0 || m > k * n) {
+            return 0;
+        }
+        if (m == 0 || m == k * n) {
+            return 1;
+        }
+        long count = 0;
+        for (int mm = 0; mm <= m; mm++) {
+            count += getBlockWays(k - 1, n, mm);
+        }
+        return count;
+    }
+
     private static List<List<Integer>> getCandidatesPowers(int sum, int count, int pred) {
         List<List<Integer>> powersList = new ArrayList<>();
 

@@ -13,6 +13,8 @@ public class DivisorsTests {
         Assert.assertEquals(Divisors.gcd(7, 12), 1);
         Assert.assertEquals(Divisors.gcd(7, 49), 7);
         Assert.assertEquals(Divisors.gcd(12121212L, 23422344L), 12);
+        Assert.assertEquals(Divisors.gcd(new long[]{14, 21, 28, 2, 49}), 1);
+        Assert.assertEquals(Divisors.gcd(new long[]{14, 21, 28, 49}), 7);
     }
 
     @Test

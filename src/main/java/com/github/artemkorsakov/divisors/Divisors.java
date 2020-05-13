@@ -4,14 +4,15 @@ import com.github.artemkorsakov.primes.Primes;
 import lombok.Data;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Divisors {
     private static final Map<Long, BigInteger> SUM_OF_DIVISORS_BI_MAP = new HashMap<>();
     private static final Map<Long, Integer> COUNT_OF_DIVISORS = new HashMap<>();
+
+    public static long gcd(long[] aArray) {
+        return Arrays.stream(aArray).reduce(Divisors::gcd).orElse(1);
+    }
 
     /**
      * Return the greatest common factor.
