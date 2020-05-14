@@ -126,6 +126,24 @@ public class PrimesTests {
         Assert.assertEquals(primePowers[6], new int[]{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
         Assert.assertEquals(primePowers[7], new int[]{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
         Assert.assertEquals(primePowers[100], new int[]{2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+
+        Map<Integer, Map<Integer, Integer>> primePowers2 = Primes.getAllPrimePowers2(100);
+        Assert.assertEquals(primePowers2.get(2).get(2).intValue(), 1);
+        Assert.assertEquals(primePowers2.get(2).keySet().size(), 1);
+        Assert.assertEquals(primePowers2.get(3).get(3).intValue(), 1);
+        Assert.assertEquals(primePowers2.get(3).keySet().size(), 1);
+        Assert.assertEquals(primePowers2.get(4).get(2).intValue(), 2);
+        Assert.assertEquals(primePowers2.get(4).keySet().size(), 1);
+        Assert.assertEquals(primePowers2.get(5).get(5).intValue(), 1);
+        Assert.assertEquals(primePowers2.get(4).keySet().size(), 1);
+        Assert.assertEquals(primePowers2.get(100).get(2).intValue(), 2);
+        Assert.assertEquals(primePowers2.get(100).get(5).intValue(), 2);
+        Assert.assertEquals(primePowers2.get(100).keySet().size(), 2);
+
+        primePowers2 = Primes.getAllPrimePowers2(1_000_000);
+        Assert.assertEquals(primePowers2.get(1_000_000).get(2).intValue(), 6);
+        Assert.assertEquals(primePowers2.get(1_000_000).get(5).intValue(), 6);
+        Assert.assertEquals(primePowers2.get(1_000_000).keySet().size(), 2);
     }
 
 }

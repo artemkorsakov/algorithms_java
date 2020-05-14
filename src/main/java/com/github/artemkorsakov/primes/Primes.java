@@ -242,15 +242,41 @@ public class Primes {
         int[][] primePowers = new int[limit + 1][primes.length];
 
         for (int i = 0; i < primes.length; i++) {
-            int prime = primes[i];
-            int k = 1;
-            while (prime <= limit) {
-                int number = prime;
-                while (number <= limit) {
-                    primePowers[number][i] = k;
-                    number += prime;
+            long prime = primes[i];
+            long number = prime;
+            while (number <= limit) {
+                int k = 0;
+                long temp = prime;
+                while (number % temp == 0) {
+                    k++;
+                    temp *= prime;
                 }
-                prime *= primes[i];
+
+                primePowers[(int) number][i] = k;
+                number += prime;
+            }
+        }
+
+        return primePowers;
+    }
+
+    public static Map<Integer, Map<Integer, Integer>> getAllPrimePowers2(int limit) {
+        int[] primes = getAllPrimesNotMoreThanLimit(limit);
+
+        Map<Integer, Map<Integer, Integer>> primePowers = new HashMap<>();
+
+        for (int prime : primes) {
+            int num1 = prime;
+            int k = 1;
+            while (num1 <= limit) {
+                int num11 = num1;
+                while (num11 <= limit) {
+                    Map<Integer, Integer> temp = primePowers.getOrDefault(num11, new HashMap<>());
+                    temp.put(prime, k);
+                    primePowers.put(num11, temp);
+                    num11 += num1;
+                }
+                num1 *= prime;
                 k++;
             }
         }
