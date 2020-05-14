@@ -234,4 +234,28 @@ public class Primes {
         return result;
     }
 
+    /**
+     * Get all prime divisors of a number along with its powers.
+     */
+    public static int[][] getAllPrimePowers(int limit) {
+        int[] primes = getAllPrimesNotMoreThanLimit(limit);
+        int[][] primePowers = new int[limit + 1][primes.length];
+
+        for (int i = 0; i < primes.length; i++) {
+            int prime = primes[i];
+            int k = 1;
+            while (prime <= limit) {
+                int number = prime;
+                while (number <= limit) {
+                    primePowers[number][i] = k;
+                    number += prime;
+                }
+                prime *= primes[i];
+                k++;
+            }
+        }
+
+        return primePowers;
+    }
+
 }
