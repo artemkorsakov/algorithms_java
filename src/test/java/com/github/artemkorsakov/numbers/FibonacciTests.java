@@ -41,4 +41,21 @@ public class FibonacciTests {
         Assert.assertEquals(matrix[1][0], Fibonacci.getFibonacciNumber(20).longValueExact());
         Assert.assertEquals(matrix[1][1], Fibonacci.getFibonacciNumber(19).longValueExact());
     }
+
+    @Test
+    public void testGetFibonacciMatrixMod() {
+        long[][] matrix = Fibonacci.getFibonacciMatrix(20, 100);
+        Assert.assertEquals(matrix[0][0], Fibonacci.getFibonacciNumber(21).longValueExact() % 100);
+        Assert.assertEquals(matrix[0][1], Fibonacci.getFibonacciNumber(20).longValueExact() % 100);
+        Assert.assertEquals(matrix[1][0], Fibonacci.getFibonacciNumber(20).longValueExact() % 100);
+        Assert.assertEquals(matrix[1][1], Fibonacci.getFibonacciNumber(19).longValueExact() % 100);
+
+        long N = 1_000_000_000_000_000L;
+        long MODULO = 1307674368000L;
+        matrix = Fibonacci.getFibonacciMatrix(N, MODULO);
+        Assert.assertEquals(matrix[0][0], 73179529501L);
+        Assert.assertEquals(matrix[0][1], 36651874875L);
+        Assert.assertEquals(matrix[1][0], 36651874875L);
+        Assert.assertEquals(matrix[1][1], 36527654626L);
+    }
 }

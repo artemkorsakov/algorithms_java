@@ -19,4 +19,8 @@ public class Fibonacci {
     public static long[][] getFibonacciMatrix(int k) {
         return Matrix.power(MATRIX, k);
     }
+
+    public static long[][] getFibonacciMatrix(long k, long mod) {
+        return Matrix.powerMod(MATRIX, k, mod);
+    }
 }

@@ -45,8 +45,8 @@ public class Matrix {
         }
         return IntStream.range(0, x.length).parallel()
                 .filter(i -> x[i] != 0 && y[i] != 0)
-                .mapToLong(i -> (x[i] * y[i]) % module)
-                .sum() % module;
+                .mapToLong(i -> BigInteger.valueOf(x[i]).multiply(BigInteger.valueOf(y[i])).mod(BigInteger.valueOf(module)).longValueExact())
+                .reduce((l1, l2) -> l1 = (l1 + l2) % module).orElse(0);
     }
 
     /**

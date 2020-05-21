@@ -26,7 +26,7 @@ public class MatrixTests {
     public void testDotMod() {
         long[] x = new long[]{1007, 2456, -3466};
         long[] y = new long[]{-3347, 4343, 6445};
-        Assert.assertEquals(Matrix.dotMod(x, y, 1000), -391);
+        Assert.assertEquals(Matrix.dotMod(x, y, 1000), 609);
     }
 
     @Test
