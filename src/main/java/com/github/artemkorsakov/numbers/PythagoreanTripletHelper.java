@@ -1,6 +1,7 @@
 package com.github.artemkorsakov.numbers;
 
 import com.github.artemkorsakov.divisors.Divisors;
+import com.github.artemkorsakov.figure.Matrix;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -11,6 +12,15 @@ import java.util.List;
  */
 @Data
 public class PythagoreanTripletHelper {
+    public static final PythagoreanTripletLong PRIMITIVE_PYTHAGOREAN_TRIPLET = new PythagoreanTripletLong(3, 4, 5);
+    public static final long[][] A_MATRIX = new long[][]{new long[]{1, -2, 2}, new long[]{2, -1, 2}, new long[]{2, -2, 3}};
+    public static final long[][] B_MATRIX = new long[][]{new long[]{1, 2, 2}, new long[]{2, 1, 2}, new long[]{2, 2, 3}};
+    public static final long[][] C_MATRIX = new long[][]{new long[]{-1, 2, 2}, new long[]{-2, 1, 2}, new long[]{-2, 2, 3}};
+    public static final PythagoreanDeuce PRIMITIVE_PYTHAGOREAN_DEUCE = new PythagoreanDeuce(2, 1);
+    public static final long[][] A_DEUCE_MATRIX = new long[][]{new long[]{2, -1}, new long[]{1, 0}};
+    public static final long[][] B_DEUCE_MATRIX = new long[][]{new long[]{2, 1}, new long[]{1, 0}};
+    public static final long[][] C_DEUCE_MATRIX = new long[][]{new long[]{1, 2}, new long[]{0, 1}};
+
     /**
      * <a href="https://projecteuler.net/overview=009">detailed description</a>
      */
@@ -44,4 +54,33 @@ public class PythagoreanTripletHelper {
 
         return pythagoreanTriplets;
     }
+
+    /**
+     * https://en.wikipedia.org/wiki/Tree_of_primitive_Pythagorean_triples
+     */
+    public static PythagoreanTripletLong[] getNextPythagoreanTriplets(PythagoreanTripletLong pythagoreanTriplet) {
+        PythagoreanTripletLong[] pythagoreanTriplets = new PythagoreanTripletLong[3];
+        long[][] mult = Matrix.mult(A_MATRIX, pythagoreanTriplet.toColumn());
+        pythagoreanTriplets[0] = new PythagoreanTripletLong(mult[0][0], mult[1][0], mult[2][0]);
+        mult = Matrix.mult(B_MATRIX, pythagoreanTriplet.toColumn());
+        pythagoreanTriplets[1] = new PythagoreanTripletLong(mult[0][0], mult[1][0], mult[2][0]);
+        mult = Matrix.mult(C_MATRIX, pythagoreanTriplet.toColumn());
+        pythagoreanTriplets[2] = new PythagoreanTripletLong(mult[0][0], mult[1][0], mult[2][0]);
+        return pythagoreanTriplets;
+    }
+
+    /**
+     * https://en.wikipedia.org/wiki/Tree_of_primitive_Pythagorean_triples
+     */
+    public static PythagoreanDeuce[] getNextPythagoreanDeuce(PythagoreanDeuce pythagoreanDeuce) {
+        PythagoreanDeuce[] pythagoreanTriplets = new PythagoreanDeuce[3];
+        long[][] mult = Matrix.mult(A_DEUCE_MATRIX, pythagoreanDeuce.toColumn());
+        pythagoreanTriplets[0] = new PythagoreanDeuce(mult[0][0], mult[1][0]);
+        mult = Matrix.mult(B_DEUCE_MATRIX, pythagoreanDeuce.toColumn());
+        pythagoreanTriplets[1] = new PythagoreanDeuce(mult[0][0], mult[1][0]);
+        mult = Matrix.mult(C_DEUCE_MATRIX, pythagoreanDeuce.toColumn());
+        pythagoreanTriplets[2] = new PythagoreanDeuce(mult[0][0], mult[1][0]);
+        return pythagoreanTriplets;
+    }
+
 }

@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PythagoreanTriplet {
-    private int a;
-    private int b;
-    private int c;
+public class PythagoreanTripletLong {
+    private long a;
+    private long b;
+    private long c;
 
-    public PythagoreanTriplet(int[] array) {
+    public PythagoreanTripletLong(long[] array) {
         if (array.length != 3) {
             throw new IllegalArgumentException();
         }
@@ -25,8 +25,12 @@ public class PythagoreanTriplet {
         c = array[2];
     }
 
-    public int[] toArray() {
-        return new int[]{a, b, c};
+    public long[] toArray() {
+        return new long[]{a, b, c};
+    }
+
+    public long[][] toColumn() {
+        return new long[][]{new long[]{a}, new long[]{b}, new long[]{c}};
     }
 
 }

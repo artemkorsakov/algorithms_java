@@ -26,8 +26,20 @@ public class Fraction implements Comparable<Fraction> {
         this(BigInteger.valueOf(numerator), BigInteger.valueOf(denominator));
     }
 
+    public Fraction(int numerator) {
+        this(BigInteger.valueOf(numerator), BigInteger.ONE);
+    }
+
     public Fraction(long numerator, long denominator) {
         this(BigInteger.valueOf(numerator), BigInteger.valueOf(denominator));
+    }
+
+    public Fraction(long numerator) {
+        this(BigInteger.valueOf(numerator), BigInteger.ONE);
+    }
+
+    public Fraction(BigInteger numerator) {
+        this(numerator, BigInteger.ONE);
     }
 
     public Fraction(BigInteger numerator, BigInteger denominator) {
