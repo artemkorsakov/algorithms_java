@@ -1,5 +1,7 @@
 package com.github.artemkorsakov.sort;
 
+import java.util.Arrays;
+
 public class Sort {
     /**
      * @see <a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion sort</a>
@@ -71,6 +73,47 @@ public class Sort {
                 array[i] = temp;
             }
         }
+    }
+
+
+    /**
+     * @see <a href="https://en.wikipedia.org/wiki/Merge_sort">Merge sort</a>
+     * О(n^2) comparisons, О(n) swaps
+     */
+    public static void mergeSort(int[] array) {
+        mergeSort(array, 0, array.length - 1);
+    }
+
+    private static void mergeSort(int[] array, int first, int last) {
+        if (last <= first) {
+            return;
+        }
+        int mid = first + (last - first) / 2;
+        mergeSort(array, first, mid);
+        mergeSort(array, mid + 1, last);
+
+        int[] buf = Arrays.copyOf(array, array.length);
+        if (last + 1 - first >= 0) {
+            System.arraycopy(array, first, buf, first, last + 1 - first);
+        }
+
+        int i = first, j = mid + 1;
+        for (int k = first; k <= last; k++) {
+            if (i > mid) {
+                array[k] = buf[j];
+                j++;
+            } else if (j > last) {
+                array[k] = buf[i];
+                i++;
+            } else if (buf[j] < buf[i]) {
+                array[k] = buf[j];
+                j++;
+            } else {
+                array[k] = buf[i];
+                i++;
+            }
+        }
+
     }
 
 }

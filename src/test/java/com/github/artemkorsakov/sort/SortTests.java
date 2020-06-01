@@ -21,4 +21,11 @@ public class SortTests {
         Sort.selectionReverse(actual);
         Assert.assertEquals(actual, new int[]{6, 5, 4, 3, 2, 1});
     }
+
+    @Test
+    public void testMergeSort() {
+        int[] actual = new int[]{5, 2, 4, 6, 1, 3};
+        Sort.mergeSort(actual);
+        Assert.assertEquals(actual, new int[]{1, 2, 3, 4, 5, 6});
+    }
 }

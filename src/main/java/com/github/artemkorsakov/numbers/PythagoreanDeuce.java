@@ -26,6 +26,18 @@ public class PythagoreanDeuce {
         n = array[1];
     }
 
+    public long getA() {
+        return m * m - n * n;
+    }
+
+    public long getB() {
+        return 2 * m * n;
+    }
+
+    public long getC() {
+        return m * m + n * n;
+    }
+
     public long[] toArray() {
         return new long[]{m, n};
     }
@@ -35,10 +47,7 @@ public class PythagoreanDeuce {
     }
 
     public PythagoreanTripletLong toPythagoreanTripletLong() {
-        long a = m * m - n * n;
-        long b = 2 * m * n;
-        long c = m * m + n * n;
-        return new PythagoreanTripletLong(a, b, c);
+        return new PythagoreanTripletLong(getA(), getB(), getC());
     }
 
 }
