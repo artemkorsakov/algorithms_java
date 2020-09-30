@@ -57,6 +57,12 @@ public class CoinsTests {
     }
 
     @Test
+    public void testGetBlockWays() {
+        Assert.assertEquals(Coins.getBlockWays(4, 1, 1), 4);
+        Assert.assertEquals(Coins.getBlockWays(3, 2, 2), 6);
+    }
+
+    @Test
     public void testGetCandidatesPowers() {
         List<List<Integer>> powersList = Coins.getCandidatesPowers(5, 1);
         Assert.assertEquals(powersList, Collections.singletonList(Collections.singletonList(5)));
@@ -90,9 +96,4 @@ public class CoinsTests {
         Assert.assertEquals(powersList, Collections.singletonList(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1)));
     }
 
-    @Test
-    public void testGetBlockWays() {
-        Assert.assertEquals(Coins.getBlockWays(4, 1, 1), 4);
-        Assert.assertEquals(Coins.getBlockWays(3, 2, 2), 6);
-    }
 }

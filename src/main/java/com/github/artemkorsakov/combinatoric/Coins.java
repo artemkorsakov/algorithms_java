@@ -73,13 +73,6 @@ public class Coins {
     }
 
     /**
-     * Returns all options to get the sum sum with a given count of numbers.
-     */
-    public static List<List<Integer>> getCandidatesPowers(int sum, int count) {
-        return getCandidatesPowers(sum, count, sum);
-    }
-
-    /**
      * У нас есть k блоков по n элементов. Сколько различных вариантов вытащить m элементов,
      * так что имеет значение только блок, из которого он вытаскивается?
      */
@@ -95,6 +88,13 @@ public class Coins {
             count += getBlockWays(k - 1, n, mm);
         }
         return count;
+    }
+
+    /**
+     * Returns all options to get the sum sum with a given count of numbers.
+     */
+    public static List<List<Integer>> getCandidatesPowers(int sum, int count) {
+        return getCandidatesPowers(sum, count, sum);
     }
 
     private static List<List<Integer>> getCandidatesPowers(int sum, int count, int pred) {

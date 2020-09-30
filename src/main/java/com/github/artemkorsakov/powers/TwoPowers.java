@@ -9,7 +9,7 @@ public class TwoPowers {
         int mul = 1;
 
         while (mul <= limit) {
-            mul *= 2;
+            mul <<= 1;
             power++;
         }
 
